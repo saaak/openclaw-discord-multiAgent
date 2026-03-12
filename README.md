@@ -1,8 +1,36 @@
 # [OpenClaw] Discord Multi-Agent Template
 
+中文说明见：[`README.zh-CN.md`](README.zh-CN.md)
+
 This folder is a **role-agnostic** template for running a **multi-agent OpenClaw deployment** on a chat platform (Discord used as the concrete example).
 
 It distills the core collaboration patterns from an existing OpenClaw setup into a reusable “skill-style” spec + configuration flow.
+
+## Copy/Paste Prompt (recommended)
+
+### For Humans
+
+Copy and paste this prompt to your LLM agent (Claude Code, AmpCode, Cursor, etc.):
+
+```
+You are setting up an OpenClaw multi-agent deployment using this GitHub repository:
+https://github.com/saaak/openclaw-discord-multiAgent
+
+Read:
+- docs/CONFIGURATION_FLOW.md
+- docs/AGENT_COLLABORATION_PROTOCOL.md
+
+Then produce a ready-to-use openclaw.json by filling templates/openclaw.json.
+Use only these inputs I will provide: LLM baseUrl+apiKey, Discord bot token(s), guildId, channel IDs, (optional) allowlist user IDs.
+Do NOT hard-code any other IDs, and do NOT include secrets in committed files.
+Finally, output a short validation checklist to confirm routing + specialist publishing works.
+```
+
+### For LLM Agents
+
+Open and follow the local guide:
+
+- `docs/CONFIGURATION_FLOW.md`
 
 ## What you get
 
@@ -30,31 +58,3 @@ It distills the core collaboration patterns from an existing OpenClaw setup into
 ---
 
 Start here: `docs/CONFIGURATION_FLOW.md`.
-
----
-
-## Copy/Paste Prompt (recommended)
-
-### For Humans
-
-Copy and paste this prompt to your LLM agent (Claude Code, AmpCode, Cursor, etc.):
-
-```
-You are setting up an OpenClaw multi-agent deployment using the local template at:
-C:\Users\13511\.openclaw\openclaw-discord-multiagent
-
-Read:
-- docs/CONFIGURATION_FLOW.md
-- docs/AGENT_COLLABORATION_PROTOCOL.md
-
-Then produce a ready-to-use openclaw.json by filling templates/openclaw.json.
-Use only these inputs I will provide: LLM baseUrl+apiKey, Discord bot token(s), guildId, channel IDs, (optional) allowlist user IDs.
-Do NOT hard-code any other IDs, and do NOT include secrets in committed files.
-Finally, output a short validation checklist to confirm routing + specialist publishing works.
-```
-
-### For LLM Agents
-
-Open and follow the local guide:
-
-- `docs/CONFIGURATION_FLOW.md`
