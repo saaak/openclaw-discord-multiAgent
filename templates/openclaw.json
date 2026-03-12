@@ -1,0 +1,161 @@
+{
+  "meta": {
+    "lastTouchedVersion": "<OPENCLAW_VERSION>",
+    "lastTouchedAt": "<ISO8601_TIMESTAMP>"
+  },
+  "models": {
+    "providers": {
+      "<provider-id>": {
+        "baseUrl": "<https://your-llm-endpoint>",
+        "apiKey": "<YOUR_LLM_API_KEY>",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "<model-id>",
+            "name": "<Model Name>",
+            "reasoning": false,
+            "input": ["text"],
+            "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
+            "contextWindow": 128000,
+            "maxTokens": 8192
+          }
+        ]
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": { "primary": "<provider-id>/<model-id>" },
+      "workspace": "<ABSOLUTE_PATH_TO_WORKSPACE_ROOT>",
+      "maxConcurrent": 4,
+      "subagents": { "maxConcurrent": 8 }
+    },
+    "list": [
+      {
+        "id": "coordinator",
+        "name": "Coordinator",
+        "subagents": {
+          "allowAgents": ["coordinator", "specialist-1", "specialist-2"]
+        },
+        "identity": { "name": "Coordinator", "emoji": "📋" }
+      },
+      {
+        "id": "specialist-1",
+        "name": "Specialist 1",
+        "workspace": "<ABSOLUTE_PATH_TO_WORKSPACE_SPECIALIST_1>",
+        "agentDir": "<ABSOLUTE_PATH_TO_AGENTDIR_SPECIALIST_1>",
+        "model": { "primary": "<provider-id>/<model-id>" },
+        "identity": { "name": "Specialist 1", "emoji": "🛠️" }
+      },
+      {
+        "id": "specialist-2",
+        "name": "Specialist 2",
+        "workspace": "<ABSOLUTE_PATH_TO_WORKSPACE_SPECIALIST_2>",
+        "agentDir": "<ABSOLUTE_PATH_TO_AGENTDIR_SPECIALIST_2>",
+        "model": { "primary": "<provider-id>/<model-id>" },
+        "identity": { "name": "Specialist 2", "emoji": "📣" }
+      }
+    ]
+  },
+  "tools": {
+    "profile": "full",
+    "agentToAgent": {
+      "enabled": true,
+      "allow": ["coordinator", "specialist-1", "specialist-2"]
+    },
+    "subagents": {
+      "tools": {
+        "deny": ["gateway", "cron", "nodes"]
+      }
+    }
+  },
+  "bindings": [
+    {
+      "agentId": "coordinator",
+      "match": {
+        "channel": "discord",
+        "accountId": "coordinator",
+        "peer": { "kind": "channel", "id": "<COORDINATOR_CHANNEL_ID>" },
+        "guildId": "<GUILD_ID>"
+      }
+    },
+    {
+      "agentId": "specialist-1",
+      "match": {
+        "channel": "discord",
+        "accountId": "specialist-1",
+        "peer": { "kind": "channel", "id": "<SPECIALIST_1_CHANNEL_ID>" },
+        "guildId": "<GUILD_ID>"
+      }
+    },
+    {
+      "agentId": "specialist-2",
+      "match": {
+        "channel": "discord",
+        "accountId": "specialist-2",
+        "peer": { "kind": "channel", "id": "<SPECIALIST_2_CHANNEL_ID>" },
+        "guildId": "<GUILD_ID>"
+      }
+    }
+  ],
+  "channels": {
+    "discord": {
+      "enabled": true,
+      "groupPolicy": "allowlist",
+      "dm": { "groupEnabled": true },
+      "accounts": {
+        "coordinator": {
+          "token": "<DISCORD_BOT_TOKEN_COORDINATOR>",
+          "groupPolicy": "allowlist",
+          "guilds": {
+            "<GUILD_ID>": {
+              "requireMention": false,
+              "channels": {
+                "<COORDINATOR_CHANNEL_ID>": { "allow": true }
+              }
+            }
+          }
+        },
+        "specialist-1": {
+          "token": "<DISCORD_BOT_TOKEN_SPECIALIST_1>",
+          "groupPolicy": "allowlist",
+          "guilds": {
+            "<GUILD_ID>": {
+              "requireMention": false,
+              "channels": {
+                "<SPECIALIST_1_CHANNEL_ID>": { "allow": true }
+              }
+            }
+          }
+        },
+        "specialist-2": {
+          "token": "<DISCORD_BOT_TOKEN_SPECIALIST_2>",
+          "groupPolicy": "allowlist",
+          "guilds": {
+            "<GUILD_ID>": {
+              "requireMention": false,
+              "channels": {
+                "<SPECIALIST_2_CHANNEL_ID>": { "allow": true }
+              }
+            }
+          }
+        },
+        "default": { "groupPolicy": "allowlist" }
+      }
+    }
+  },
+  "gateway": {
+    "port": 18789,
+    "mode": "local",
+    "bind": "loopback",
+    "auth": {
+      "mode": "token",
+      "token": "<OPENCLAW_GATEWAY_TOKEN>"
+    }
+  },
+  "plugins": {
+    "entries": {
+      "discord": { "enabled": true }
+    }
+  }
+}
