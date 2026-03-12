@@ -41,6 +41,22 @@ Open and follow the local guide:
 - `templates/credentials/*.json` — allowlist templates.
 - `templates/workspaces/**/AGENTS.md` — role-agnostic agent instruction templates.
 
+## Collaboration capabilities
+
+- Supports **agent-to-agent invocation** for specialist handoff.
+- Supports **task dispatching** from coordinator to specialist agents.
+- Supports **centralized aggregation** by a unified coordinator agent before publishing responses.
+
+## Demo screenshots
+
+### Dispatch instructions
+
+![Dispatch instructions](imgs/DispatchInstructions.png)
+
+### Response command
+
+![Response command](imgs/ResponseCommand.png)
+
 ## Minimal inputs you must provide
 
 1. **LLM provider config** (base URL + API key) OR a local model endpoint.

@@ -41,6 +41,22 @@ Finally, output a short validation checklist to confirm routing + specialist pub
 - `templates/credentials/*.json` —— allowlist 模板。
 - `templates/workspaces/**/AGENTS.md` —— 与角色无关的智能体指令模板。
 
+## 协作能力
+
+- 支持 **agent 之间互相唤起**，用于专家智能体协同接力。
+- 支持由协调者向专家智能体 **派发任务**。
+- 支持由统一协调者 agent 对多路结果进行 **汇总后统一输出**。
+
+## 效果展示
+
+### 派发指令
+
+![派发指令](imgs/DispatchInstructions.png)
+
+### 响应指令
+
+![响应指令](imgs/ResponseCommand.png)
+
 ## 你需要提供的最小输入
 
 1. **LLM 提供商配置**（base URL + API key）或本地模型端点。
