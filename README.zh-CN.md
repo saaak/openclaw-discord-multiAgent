@@ -1,6 +1,6 @@
 # [OpenClaw] Discord 多智能体模板
 
-English README: [`README.md`](README.md)
+[English](README.md) | [简体中文](README.zh-CN.md)
 
 这个目录是一个**与角色无关**的模板，用于在聊天平台上运行 **OpenClaw 多智能体部署**（这里以 Discord 作为示例）。
 

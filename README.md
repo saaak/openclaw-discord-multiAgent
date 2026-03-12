@@ -1,6 +1,6 @@
 # [OpenClaw] Discord Multi-Agent Template
 
-中文说明见：[`README.zh-CN.md`](README.zh-CN.md)
+[English](README.md) | [简体中文](README.zh-CN.md)
 
 This folder is a **role-agnostic** template for running a **multi-agent OpenClaw deployment** on a chat platform (Discord used as the concrete example).
 
