@@ -16,13 +16,15 @@ Copy and paste this prompt to your LLM agent (Claude Code, AmpCode, Cursor, etc.
 You are setting up an OpenClaw multi-agent deployment using this GitHub repository:
 https://github.com/saaak/openclaw-discord-multiAgent
 
-Read:
-- docs/CONFIGURATION_FLOW.md
-- docs/AGENT_COLLABORATION_PROTOCOL.md
+Fetch ONLY these docs (do not clone/download the whole repository):
+- https://raw.githubusercontent.com/saaak/openclaw-discord-multiAgent/main/docs/CONFIGURATION_FLOW.md
+- https://raw.githubusercontent.com/saaak/openclaw-discord-multiAgent/main/docs/AGENT_COLLABORATION_PROTOCOL.md
 
-Then produce a ready-to-use openclaw.json by filling templates/openclaw.json.
-Use only these inputs I will provide: LLM baseUrl+apiKey, Discord bot token(s), guildId, channel IDs, (optional) allowlist user IDs.
-Do NOT hard-code any other IDs, and do NOT include secrets in committed files.
+Then generate or update openclaw.json based on templates/openclaw.json.
+Use only values I explicitly provide: LLM baseUrl+apiKey, Discord bot token(s), guildId, channel IDs, (optional) allowlist user IDs.
+Do NOT invent/hallucinate any configuration values. For missing required values, keep placeholders like <REQUIRED_VALUE> and list what is missing.
+If an existing openclaw.json is present, modify it in place with minimal changes; do NOT overwrite unrelated existing settings.
+Do NOT hard-code any additional IDs, and do NOT include secrets in committed files.
 Finally, output a short validation checklist to confirm routing + specialist publishing works.
 ```
 
