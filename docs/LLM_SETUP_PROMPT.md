@@ -30,6 +30,7 @@ Collect required user configuration safely and update `openclaw.json` with minim
 
 4. **Handle existing settings carefully**
    - For existing LLM model, Discord channel, workspace, and similar settings, ask whether to reuse existing values or create new ones.
+   - If `llmProvider` is already configured, do **not** ask the user to re-enter provider credentials/config by default; ask whether to reuse the existing `llmProvider` config.
 
 5. **Update strategy: additive first**
    - After all required values are confirmed, directly edit `openclaw.json`.
