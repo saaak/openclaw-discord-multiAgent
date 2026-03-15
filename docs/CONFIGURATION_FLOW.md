@@ -10,7 +10,17 @@ It is written so an AI model (or an operator) can complete setup with only:
 - channel IDs
 - optional allowlist user IDs
 
-## 0) Decide: single bot vs multi-bot
+## 0) Confirm role relationship style (before technical setup)
+
+Before any config/workspace edits, confirm with the user:
+
+- Relationship style for dispatcher vs worker agents (examples: modern company, guild, imperial court, or custom)
+- Naming mapping for role IDs (which role maps to `coordinator`, which roles map to `specialist-*`)
+- Dispatch/execute responsibility boundaries (who routes tasks, who performs execution)
+
+This avoids naming/routing rework later and ensures role semantics are explicit.
+
+## 1) Decide: single bot vs multi-bot
 
 ### Option A — Single bot (simpler)
 
@@ -24,7 +34,7 @@ It is written so an AI model (or an operator) can complete setup with only:
 - Each specialist publishes messages under its own identity.
 - Requires creating multiple Discord applications/bots.
 
-## 1) Create Discord apps/bots
+## 2) Create Discord apps/bots
 
 For each bot you plan to run:
 
@@ -37,7 +47,7 @@ Notes:
 - If you want the bot to read message content in servers, Discord may require enabling the **Message Content Intent**.
 - Keep permissions minimal; rely on channel-level permission overwrites where possible.
 
-## 2) Identify Discord IDs
+## 3) Identify Discord IDs
 
 You will need:
 
@@ -46,7 +56,7 @@ You will need:
 - One channel per specialist (optional but recommended)
 - A shared “meeting room” channel (optional)
 
-## 3) Fill the OpenClaw config template
+## 4) Fill the OpenClaw config template
 
 Start from: `templates/openclaw.json`
 
@@ -95,16 +105,24 @@ Practical routing patterns:
 2. Specialist channels → the matching specialist agent
 3. Meeting room → either coordinator only, or all agents (depending on your workflow)
 
-## 4) Create workspaces and AGENTS.md
+## 5) Create NEW workspaces and AGENTS.md (do not mutate existing workspaces)
 
 Use templates under `templates/workspaces/`.
+
+Important policy:
+
+- For a new role relationship setup, create a new workspace set with new paths.
+- Do **not** modify existing workspace folders for the new setup.
+- Keep existing workspaces as-is to avoid breaking previously working deployments.
 
 Minimum recommended:
 
 - `workspaces/coordinator/AGENTS.md` — delegation rules (spawn vs send)
 - `workspaces/specialist/AGENTS.md` — completion contract + publish rules
 
-## 5) Start OpenClaw
+Then bind these new workspace paths in your runtime `openclaw.json` agent entries.
+
+## 6) Start OpenClaw
 
 Run your OpenClaw gateway in your environment (example):
 
@@ -112,17 +130,17 @@ Run your OpenClaw gateway in your environment (example):
 openclaw start
 ```
 
-## 5.1) Credential storage recommendation
+## 6.1) Credential storage recommendation
 
-- Keep `openclaw.json` outside of git, or commit only a placeholder/template file.
+- Keep your runtime `openclaw.json` outside of git, or commit only a placeholder/template file.
 - Prefer environment variables or an external secret store for:
   - LLM API keys
   - Discord bot tokens
   - gateway auth token
 
-If you must keep tokens in `openclaw.json` for local testing, treat the file as a secret.
+If you must keep tokens in runtime `openclaw.json` for local testing, treat the file as a secret.
 
-## 6) Validate the system
+## 7) Validate the system
 
 ### Routing
 
@@ -137,7 +155,7 @@ If you run one bot per agent:
 - Validate the message author is the specialist bot.
 - If messages appear under the coordinator bot, ensure the send tool specifies the correct `accountId`.
 
-## 7) Common failures
+## 8) Common failures
 
 ### “agentId not allowed”
 
@@ -153,7 +171,7 @@ If you run one bot per agent:
 
 - Ensure message sending includes the correct `accountId` for that specialist.
 
-## 8) Notes on schema stability
+## 9) Notes on schema stability
 
 OpenClaw is evolving. If a field name differs from your installed version:
 
