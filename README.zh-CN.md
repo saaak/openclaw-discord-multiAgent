@@ -16,20 +16,8 @@
 You are setting up an OpenClaw multi-agent deployment using this GitHub repository:
 https://github.com/saaak/openclaw-discord-multiAgent
 
-Fetch and read ONLY these docs first (do not clone/download the whole repository):
-- https://docs.openclaw.ai/gateway/configuration-reference
-- https://raw.githubusercontent.com/saaak/openclaw-discord-multiAgent/main/docs/CONFIGURATION_FLOW.md
-- https://raw.githubusercontent.com/saaak/openclaw-discord-multiAgent/main/docs/AGENT_COLLABORATION_PROTOCOL.md
-
-Then read the user's existing openclaw.json first.
-If the user has not provided required config values, ask for them (do not invent/hallucinate values).
-If a form tool is available, present a form for required fields; if no form tool is available, send a clear required-fields checklist for the user to fill.
-For LLM model, Discord channels, workspace, and similar settings: if the system already has existing values, ask the user whether to reuse existing ones or create new ones.
-After all required values are confirmed, directly update openclaw.json.
-Prefer additive changes; do not overwrite or remove unrelated existing settings.
-If any required value is still missing, keep placeholders like <REQUIRED_VALUE> and explicitly list missing items.
-Do NOT hard-code extra IDs, and do NOT include secrets in committed files.
-Finally, output a short validation checklist to confirm routing + specialist publishing works.
+Fetch and follow this single instruction document only:
+https://raw.githubusercontent.com/saaak/openclaw-discord-multiAgent/main/docs/LLM_SETUP_PROMPT.md
 ```
 
 ### 给 LLM 智能体
