@@ -16,15 +16,19 @@ Copy and paste this prompt to your LLM agent (Claude Code, AmpCode, Cursor, etc.
 You are setting up an OpenClaw multi-agent deployment using this GitHub repository:
 https://github.com/saaak/openclaw-discord-multiAgent
 
-Fetch ONLY these docs (do not clone/download the whole repository):
+Fetch and read ONLY these docs first (do not clone/download the whole repository):
+- https://docs.openclaw.ai/gateway/configuration-reference
 - https://raw.githubusercontent.com/saaak/openclaw-discord-multiAgent/main/docs/CONFIGURATION_FLOW.md
 - https://raw.githubusercontent.com/saaak/openclaw-discord-multiAgent/main/docs/AGENT_COLLABORATION_PROTOCOL.md
 
-Then generate or update openclaw.json based on templates/openclaw.json.
-Use only values I explicitly provide: LLM baseUrl+apiKey, Discord bot token(s), guildId, channel IDs, (optional) allowlist user IDs.
-Do NOT invent/hallucinate any configuration values. For missing required values, keep placeholders like <REQUIRED_VALUE> and list what is missing.
-If an existing openclaw.json is present, modify it in place with minimal changes; do NOT overwrite unrelated existing settings.
-Do NOT hard-code any additional IDs, and do NOT include secrets in committed files.
+Then read the user's existing openclaw.json first.
+If the user has not provided required config values, ask for them (do not invent/hallucinate values).
+If a form tool is available, present a form for required fields; if no form tool is available, send a clear required-fields checklist for the user to fill.
+For LLM model, Discord channels, workspace, and similar settings: if the system already has existing values, ask the user whether to reuse existing ones or create new ones.
+After all required values are confirmed, directly update openclaw.json.
+Prefer additive changes; do not overwrite or remove unrelated existing settings.
+If any required value is still missing, keep placeholders like <REQUIRED_VALUE> and explicitly list missing items.
+Do NOT hard-code extra IDs, and do NOT include secrets in committed files.
 Finally, output a short validation checklist to confirm routing + specialist publishing works.
 ```
 
